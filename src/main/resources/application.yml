@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: leaderboard-data-aggregator
+
+app:
+  feed:
+    folder: C:\VCS\leaderboard-data-aggregator\feed
