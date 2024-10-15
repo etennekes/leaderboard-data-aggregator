@@ -1,4 +1,4 @@
-package nl.group9.lda.aggregator
+package nl.group9.lda.filedata
 
 enum class DataType {
     SYN_CPQ,

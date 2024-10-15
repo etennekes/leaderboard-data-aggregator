@@ -1,4 +1,4 @@
-package nl.group9.lda.aggregator
+package nl.group9.lda.filedata
 
 import java.math.BigDecimal
 
@@ -8,9 +8,7 @@ data class FileData(
     val eval: Long,
     val score: BigDecimal,
     val dataType: String
-) {
-
-}
+)
 
 data class FileDataBuilder(
     val prep: Long,

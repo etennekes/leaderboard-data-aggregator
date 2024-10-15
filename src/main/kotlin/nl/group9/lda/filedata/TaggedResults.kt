@@ -1,11 +1,12 @@
-package nl.group9.lda.aggregator
+package nl.group9.lda.filedata
 
+import nl.group9.lda.util.TagUtil
 import java.math.BigDecimal
 
 data class TaggedResults(
     val tag: String,
     val team: String,
-    val build: Int,
+    val build: String,
     val data: TaggedResultsData
 )
 
@@ -17,7 +18,9 @@ data class TaggedResultsBuilder(
     fun build(): TaggedResults {
         val teamAndBuild = TagUtil.toTeamAndBuild(tag)
         return TaggedResults(
-            tag, teamAndBuild.first, teamAndBuild.second,
+            tag,
+            teamAndBuild.first,
+            teamAndBuild.second,
             TaggedResultsData(
                 fileData.prep,
                 fileData.load,
@@ -33,8 +36,4 @@ data class TaggedResultsData(
     val load: Long,
     val eval: Long,
     val score: BigDecimal,
-) {
-
-}
-
-
+)

@@ -18,13 +18,23 @@ repositories {
 	mavenCentral()
 }
 
+extra["springModulithVersion"] = "1.2.4"
+
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework.boot:spring-boot-devtools")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.modulith:spring-modulith-starter-core")
+	implementation("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+	testImplementation("org.springframework.modulith:spring-modulith-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+dependencyManagement {
+	imports {
+		mavenBom("org.springframework.modulith:spring-modulith-bom:${property("springModulithVersion")}")
+	}
 }
 
 kotlin {

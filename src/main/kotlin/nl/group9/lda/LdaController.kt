@@ -1,6 +1,6 @@
 package nl.group9.lda
 
-import nl.group9.lda.aggregator.AggregatedData
+import nl.group9.lda.aggregation.Aggregation
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -16,17 +16,17 @@ class LdaController(private val service: LdaService) {
     }
 
     @GetMapping( "/{increment}")
-    fun getIncrementAggregatedData(@PathVariable increment: Int): AggregatedData {
+    fun getIncrementAggregatedData(@PathVariable increment: Int): Aggregation {
         return service.aggregatedData(increment, null)
     }
 
     @GetMapping( "/{increment}/{previous}")
-    fun getIncrementAggregatedData(@PathVariable increment: Int, @PathVariable previous: Int): AggregatedData {
+    fun getIncrementAggregatedData(@PathVariable increment: Int, @PathVariable previous: Int): Aggregation {
         return service.aggregatedData(increment, previous)
     }
 
     @GetMapping
-    fun getAggregatedData(): AggregatedData {
+    fun getAggregatedData(): Aggregation {
         val increment = service.latestIncrement()
         return service.aggregatedData(increment, null)
     }

@@ -1,7 +1,7 @@
 package nl.group9.lda.config
 
 import jakarta.annotation.PreDestroy
-import nl.group9.lda.aggregator.DataAggregatorService
+import nl.group9.lda.aggregator.AggregatorService
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.devtools.filewatch.FileSystemWatcher
 import org.springframework.context.annotation.Bean
@@ -10,7 +10,7 @@ import java.io.File
 import java.time.Duration
 
 @Configuration
-class ApplicationConfig(val service: DataAggregatorService) {
+class ApplicationConfig(val service: AggregatorService) {
 
     @Value("\${app.feed.folder}")
     private lateinit var feedFolder: String
@@ -21,7 +21,7 @@ class ApplicationConfig(val service: DataAggregatorService) {
         fileSystemWatcher.addSourceDirectory(File(feedFolder))
         fileSystemWatcher.addListener(FeedChangeListener(service))
         fileSystemWatcher.start()
-        println("started fileSystemWatcher")
+        println("File system watcher started; detecting changes.")
         return fileSystemWatcher
     }
 

@@ -1,6 +1,9 @@
-package nl.group9.lda.aggregator
+package nl.group9.lda.aggregation
 
-data class AggregatedData(
+import nl.group9.lda.filedata.TaggedResults
+import nl.group9.lda.filedata.TeamTagResults
+
+data class Aggregation(
     val overall: List<TaggedResults>,
     val synCpq: List<TaggedResults>,
     val realCpq: List<TaggedResults>,
@@ -8,6 +11,4 @@ data class AggregatedData(
     val realRpq: List<TaggedResults>,
     val teams: Map<String, List<TeamTagResults>>,
     var diff: List<String>?
-) {
-
-}
+)
