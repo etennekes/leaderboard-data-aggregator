@@ -16,11 +16,11 @@ data class TaggedResultsBuilder(
 
 ) {
     fun build(): TaggedResults {
-        val teamAndBuild = TagUtil.toTeamAndBuild(tag)
+        val tagAndTeamAndBuild = TagUtil.toTagAndTeamAndBuild(tag)
         return TaggedResults(
-            tag,
-            teamAndBuild.first,
-            teamAndBuild.second,
+            tagAndTeamAndBuild.first,
+            tagAndTeamAndBuild.second,
+            tagAndTeamAndBuild.third,
             TaggedResultsData(
                 fileData.prep,
                 fileData.load,

@@ -64,20 +64,20 @@ class AggregatorService(
 
     private fun collectTeamList(list: List<DirectoryData>): Map<String, List<TeamTagResults>> {
 
-        val teamAndBuilds = list.map { data -> TagUtil.toTeamAndBuild(data.directory) }
-        val teams = teamAndBuilds.toList().map { teamAndBuild -> teamAndBuild.first }.sorted().distinct()
+        val tagAndTeamAndBuilds = list.map { data -> TagUtil.toTagAndTeamAndBuild(data.directory) }
+        val teams = tagAndTeamAndBuilds.toList().map { tagAndTeamAndBuild -> tagAndTeamAndBuild.second }.sorted().distinct()
 
         val map = mutableMapOf<String, List<TeamTagResults>>()
         for (team in teams) {
             val teamTagResultList = mutableListOf<TeamTagResults>()
             for (data in list) {
                 val tag = data.directory
-                val teamAndBuild = TagUtil.toTeamAndBuild(tag)
-                if (teamAndBuild.first == team) {
+                val tagAndTeamAndBuild = TagUtil.toTagAndTeamAndBuild(tag)
+                if (tagAndTeamAndBuild.second == team) {
                     teamTagResultList.add(
                         TeamTagResults(
-                            tag,
-                            teamAndBuild.second,
+                            tagAndTeamAndBuild.first,
+                            tagAndTeamAndBuild.third,
                             collectTaggedResultsList(list, DataType.SYN_CPQ, tag),
                             collectTaggedResultsList(list, DataType.REAL_CPQ, tag),
                             collectTaggedResultsList(list, DataType.SYN_RPQ, tag),
