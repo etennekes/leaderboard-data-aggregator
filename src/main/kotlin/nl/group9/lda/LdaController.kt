@@ -17,17 +17,17 @@ class LdaController(private val service: LdaService) {
 
     @GetMapping( "/{increment}")
     fun getIncrementAggregatedData(@PathVariable increment: Int): Aggregation {
-        return service.aggregatedData(increment, null)
+        return service.getAggregation(increment, null)
     }
 
     @GetMapping( "/{increment}/{previous}")
     fun getIncrementAggregatedData(@PathVariable increment: Int, @PathVariable previous: Int): Aggregation {
-        return service.aggregatedData(increment, previous)
+        return service.getAggregation(increment, previous)
     }
 
     @GetMapping
     fun getAggregatedData(): Aggregation {
         val increment = service.latestIncrement()
-        return service.aggregatedData(increment, null)
+        return service.getAggregation(increment, null)
     }
 }

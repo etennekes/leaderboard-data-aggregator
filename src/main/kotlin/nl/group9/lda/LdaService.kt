@@ -11,7 +11,7 @@ class LdaService(val aggregatorService: AggregatorService) {
         return aggregatorService.latestIncrement()
     }
 
-    fun aggregatedData(increment: Int, previous: Int?): Aggregation {
+    fun getAggregation(increment: Int, previous: Int?): Aggregation {
         val current = aggregatorService.getIncrement(increment)
         if (previous == null) {
             return current

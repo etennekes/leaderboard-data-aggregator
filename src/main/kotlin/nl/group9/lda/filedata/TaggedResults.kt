@@ -1,7 +1,7 @@
 package nl.group9.lda.filedata
 
 import nl.group9.lda.util.TagUtil
-import java.math.BigDecimal
+import java.math.RoundingMode
 
 data class TaggedResults(
     val tag: String,
@@ -25,7 +25,7 @@ data class TaggedResultsBuilder(
                 fileData.prep,
                 fileData.load,
                 fileData.eval,
-                fileData.score
+                fileData.score.setScale(2, RoundingMode.HALF_UP).toPlainString()
             )
         )
     }
@@ -35,5 +35,5 @@ data class TaggedResultsData(
     val prep: Long,
     val load: Long,
     val eval: Long,
-    val score: BigDecimal,
+    val score: String,
 )
