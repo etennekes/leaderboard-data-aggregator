@@ -9,16 +9,16 @@ class TagUtil {
 
             val tagBuilder = StringBuilder()
 
-            if (team.length >= 10) {
-                tagBuilder.append(team.substring(0, 10) + "∴")
+            if (team.length >= 8) {
+                tagBuilder.append(team.substring(0, 8) + "∴")
             } else {
                 tagBuilder.append(team)
             }
 
             tagBuilder.append("-")
 
-            if (build.length >= 6) {
-                tagBuilder.append(build.substring(0, 6) + "∴")
+            if (build.length >= 5) {
+                tagBuilder.append(build.substring(0, 5) + "∴")
             } else {
                 tagBuilder.append(build)
             }
