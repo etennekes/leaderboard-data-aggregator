@@ -16,6 +16,7 @@ import nl.group9.lda.increment.IncrementId
 import nl.group9.lda.increment.Increments
 import nl.group9.lda.util.TagUtil
 import org.springframework.stereotype.Service
+import java.util.concurrent.atomic.AtomicBoolean
 
 @Service
 class AggregatorService(
@@ -40,7 +41,13 @@ class AggregatorService(
             return
         }
         println("Reading data for " + aggregationId.directories.size + " directories.")
-        val aggregation = createAggregation(aggregationId)
+
+        val failure = AtomicBoolean()
+        val aggregation = createAggregation(aggregationId, failure)
+
+        if (failure.get()) {
+            return
+        }
         aggregations.store(aggregationId, aggregation)
 
         val incrementId = increments.nextId()
@@ -48,8 +55,8 @@ class AggregatorService(
         println("Data made available with increment number: " + incrementId.number)
     }
 
-    private fun createAggregation(aggregationId: AggregationId): Aggregation {
-        val list = aggregationId.directories.toList().mapNotNull { directoryDataService.load(it) }.toList()
+    private fun createAggregation(aggregationId: AggregationId, failure: AtomicBoolean): Aggregation {
+        val list = aggregationId.directories.toList().mapNotNull { directoryDataService.load(it, failure) }.toList()
 
         return Aggregation(
             collectTaggedResultsList(list, DataType.OVERALL, null),

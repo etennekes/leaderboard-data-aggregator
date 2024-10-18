@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service
 import java.io.File
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.util.concurrent.atomic.AtomicBoolean
 
 @Service
 class DirectoryDataService(val fileDataService: FileDataService) {
@@ -15,7 +16,7 @@ class DirectoryDataService(val fileDataService: FileDataService) {
     @Value("\${app.feed.folder}")
     private lateinit var feedFolder: String
 
-    fun load(directory: String): DirectoryData? {
+    fun load(directory: String, failure: AtomicBoolean): DirectoryData? {
         val location = feedFolder + File.separator + directory + File.separator
         val list = listOfNotNull(
             fileDataService.loadFile(location + "output-real-cpq.json", DataType.REAL_CPQ),
@@ -26,6 +27,7 @@ class DirectoryDataService(val fileDataService: FileDataService) {
 
         if (list.size != 4) {
             println("Directory skipped (data incomplete): $directory.")
+            failure.set(true)
             return null
         }
 
