@@ -112,7 +112,7 @@ class AggregatorService(
                 ).build()
             }
             .filter { result -> tag?.let { tag == result.tag } ?: true }
-            .sortedBy { result -> result.data.score }
+            .sortedBy { result -> result.data.comp }
     }
 
     private fun createAggregationId(): AggregationId {
