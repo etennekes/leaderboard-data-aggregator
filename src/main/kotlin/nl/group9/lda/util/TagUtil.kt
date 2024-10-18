@@ -17,7 +17,7 @@ class TagUtil {
 
             tagBuilder.append("-")
 
-            if (build.length >= 6) {
+            if (build.length >= 3) {
                 tagBuilder.append(build.substring(0, 3) + "∴")
             } else {
                 tagBuilder.append(build)
